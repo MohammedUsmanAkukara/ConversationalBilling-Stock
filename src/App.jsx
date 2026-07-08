@@ -13,6 +13,7 @@ import ReportsModal from './components/modals/ReportsModal';
 import LoginScreen from './components/auth/LoginScreen';
 import { X, ShieldAlert } from 'lucide-react';
 
+
 function AppContent() {
   const { alertNotification, closeStockAlert, activeInvoiceBill, setActiveInvoiceBill, totalItems } = useInventory();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
