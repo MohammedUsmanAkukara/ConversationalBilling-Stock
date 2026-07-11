@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { X, BarChart3, TrendingUp, DollarSign, Package, AlertTriangle, Download, ArrowUpRight, ArrowDownRight, Calendar, Filter } from 'lucide-react';
+import { X, BarChart3, TrendingUp, DollarSign, Package, AlertTriangle, Download, ArrowUpRight, ArrowDownRight, Calendar, Filter, FileText, ShieldCheck } from 'lucide-react';
 import { useInventory } from '../../context/InventoryContext';
 
-export default function ReportsModal({ isOpen, onClose }) {
+export default function ReportsModal({ isOpen, onClose, onOpenGstReportModal }) {
   const { 
     items, 
     bills, 
@@ -283,6 +283,36 @@ export default function ReportsModal({ isOpen, onClose }) {
                 <span>Export JSON Database Backup</span>
               </button>
             </div>
+          </div>
+
+          {/* 5. GST Compliance & Tax Return Report ("ab last me gst report ka option bhi dedo") */}
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-900 via-teal-950 to-slate-900 text-white border border-emerald-500/30 shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-2xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
+                <FileText className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h4 className="text-sm font-extrabold text-white">Dedicated GST Compliance & Tax Filing Suite</h4>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 uppercase">
+                    GSTR-1 & GSTR-3B Ready
+                  </span>
+                </div>
+                <p className="text-xs text-slate-300 mt-1">
+                  View Output GST liability, Input Tax Credit (ITC), slab-wise breakdown (5%, 12%, 18%, 28%) & export CA-ready returns
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                onClose();
+                if (onOpenGstReportModal) onOpenGstReportModal();
+              }}
+              className="px-5 py-2.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs shrink-0 transition-all shadow-md flex items-center gap-1.5"
+            >
+              <ShieldCheck className="w-4 h-4" />
+              <span>Open Detailed GST Report</span>
+            </button>
           </div>
 
         </div>

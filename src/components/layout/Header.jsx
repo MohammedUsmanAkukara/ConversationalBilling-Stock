@@ -14,7 +14,8 @@ import {
   Users,
   BarChart3,
   User,
-  LogOut
+  LogOut,
+  FileText
 } from 'lucide-react';
 import { useInventory } from '../../context/InventoryContext';
 
@@ -24,6 +25,7 @@ export default function Header({
   onOpenBillingModal,
   onOpenPartiesModal,
   onOpenReportsModal,
+  onOpenGstReportModal,
   currentUser,
   onLogout
 }) {
@@ -39,7 +41,7 @@ export default function Header({
   const [exportMenuOpen, setExportMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 border-b border-slate-200 px-3 py-2 sm:px-6 shadow-sm">
+    <header className="shrink-0 sticky top-0 z-40 w-full bg-white/95 border-b border-slate-200 px-3 py-2 sm:px-6 shadow-sm">
       <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2">
         
         {/* Left: Brand Identity */}
@@ -143,6 +145,15 @@ export default function Header({
           >
             <BarChart3 className="w-3.5 h-3.5 text-indigo-700" />
             <span>Reports</span>
+          </button>
+
+          {/* GST RETURN & TAX REPORT BUTTON ("ab last me gst report ka option bhi dedo") */}
+          <button
+            onClick={() => onOpenGstReportModal && onOpenGstReportModal()}
+            className="flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-extrabold transition-all shadow-2xs"
+          >
+            <FileText className="w-3.5 h-3.5 text-emerald-700" />
+            <span>GST Report</span>
           </button>
 
           {/* Sound toggle */}

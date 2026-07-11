@@ -24,7 +24,7 @@ import {
 } from 'lucide-react';
 import { useInventory } from '../../context/InventoryContext';
 
-export default function ChatMessage({ message, onOpenEditModal, onOpenBillingModal, onOpenPartiesModal, onOpenReportsModal }) {
+export default function ChatMessage({ message, onOpenEditModal, onOpenBillingModal, onOpenPartiesModal, onOpenReportsModal, onOpenGstReportModal }) {
   const { 
     items, 
     updateStock, 
@@ -624,6 +624,35 @@ export default function ChatMessage({ message, onOpenEditModal, onOpenBillingMod
                 </div>
               );
             })()}
+
+            {/* 5.5 GST REPORT WIDGET IN CHAT */}
+            {message.widget.type === 'GST_REPORT_WIDGET' && (
+              <div className="rounded-3xl bg-gradient-to-br from-emerald-900 via-teal-950 to-slate-900 text-white p-5 border border-emerald-500/30 shadow-lg space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2.5 rounded-2xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-extrabold text-white">GST Return & Compliance Suite</h4>
+                      <p className="text-[11px] text-emerald-200">GSTR-1 Outward & GSTR-3B Summary</p>
+                    </div>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 uppercase">
+                    CA Audited
+                  </span>
+                </div>
+                <div className="pt-2 border-t border-emerald-500/30 flex items-center justify-between">
+                  <span className="text-xs text-slate-300">Detailed tax slab breakdown, Output vs Input Tax Credit</span>
+                  <button
+                    onClick={() => onOpenGstReportModal && onOpenGstReportModal()}
+                    className="px-4 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs transition-all shadow-md"
+                  >
+                    Open GST Suite
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* 6. OVERSELL ALERT WIDGET */}
             {message.widget.type === 'OVERSELL_ALERT' && (() => {

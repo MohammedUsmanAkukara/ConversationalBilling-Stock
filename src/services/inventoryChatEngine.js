@@ -190,6 +190,16 @@ export function parseAndExecuteChatCommand(text, items, actions) {
     };
   }
 
+  // 8.5 Check for /gst or gst report or tax report
+  if (lower === '/gst' || lower === 'gst' || lower === 'gst report' || lower === '/gstr' || lower === 'tax report') {
+    return {
+      text: `📊 **GST Compliance & Tax Return Filing Suite (GSTR-1 & GSTR-3B):**`,
+      widget: {
+        type: 'GST_REPORT_WIDGET'
+      }
+    };
+  }
+
   // 9. Check for /add or "add item" or "new item"
   if (lower === '/add' || lower === 'add item' || lower === 'new item' || lower === 'create item') {
     return {

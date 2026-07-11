@@ -5,7 +5,8 @@ import {
   Package, 
   Users, 
   BarChart3,
-  ScanLine
+  ScanLine,
+  FileText
 } from 'lucide-react';
 
 export default function MobileNavBar({ 
@@ -14,12 +15,13 @@ export default function MobileNavBar({
   onOpenBillingModal, 
   onOpenPartiesModal, 
   onOpenReportsModal,
+  onOpenGstReportModal,
   onOpenScannerModal,
   totalItems 
 }) {
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-1 py-1.5 shadow-2xl">
-      <div className="grid grid-cols-5 items-center justify-around max-w-md mx-auto">
+    <nav className="md:hidden shrink-0 w-full z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-1 py-1.5 shadow-2xl">
+      <div className="grid grid-cols-6 items-center justify-around max-w-md mx-auto">
         
         {/* 1. Chat AI Workstation */}
         <button
@@ -82,6 +84,16 @@ export default function MobileNavBar({
         >
           <BarChart3 className="w-5 h-5 mb-0.5" />
           <span className="text-[10px] tracking-tight">Reports</span>
+        </button>
+
+        {/* 6. GST Report ("ab last me gst report ka option bhi dedo") */}
+        <button
+          type="button"
+          onClick={onOpenGstReportModal}
+          className="flex flex-col items-center justify-center py-1.5 rounded-2xl text-emerald-700 hover:bg-emerald-50 transition-all font-extrabold"
+        >
+          <FileText className="w-5 h-5 mb-0.5 text-emerald-600" />
+          <span className="text-[10px] tracking-tight">GST</span>
         </button>
 
       </div>

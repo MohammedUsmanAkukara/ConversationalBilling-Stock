@@ -10,6 +10,7 @@ import BillingModal from './components/modals/BillingModal';
 import FullPageInvoiceModal from './components/modals/FullPageInvoiceModal';
 import PartiesModal from './components/modals/PartiesModal';
 import ReportsModal from './components/modals/ReportsModal';
+import GstReportModal from './components/modals/GstReportModal';
 import LoginScreen from './components/auth/LoginScreen';
 import { X, ShieldAlert } from 'lucide-react';
 
@@ -54,6 +55,9 @@ function AppContent() {
   // Reports modal state
   const [reportsModalOpen, setReportsModalOpen] = useState(false);
 
+  // GST Compliance Report modal state ("ab last me gst report ka option bhi dedo")
+  const [gstReportModalOpen, setGstReportModalOpen] = useState(false);
+
   const handleOpenBillingModal = (type = 'SALE', initialItem = null) => {
     setBillingModalState({
       isOpen: true,
@@ -68,7 +72,7 @@ function AppContent() {
   }
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-slate-50 text-slate-900 relative">
+    <div className="flex flex-col h-[100dvh] h-screen max-h-[100dvh] w-full overflow-hidden bg-slate-50 text-slate-900 relative">
       
       {/* Top Floating Alert Notification Toast (Oversell Validation Warning) */}
       {alertNotification && (
@@ -104,12 +108,13 @@ function AppContent() {
         onOpenBillingModal={handleOpenBillingModal}
         onOpenPartiesModal={() => setPartiesModalOpen(true)}
         onOpenReportsModal={() => setReportsModalOpen(true)}
+        onOpenGstReportModal={() => setGstReportModalOpen(true)}
         currentUser={currentUser}
         onLogout={handleLogout}
       />
 
-      {/* Main Split Interface - Extra padding at bottom on mobile to accommodate touch bar */}
-      <main className="flex-1 flex overflow-hidden relative pb-14 md:pb-0">
+      {/* Main Split Interface */}
+      <main className="flex-1 flex min-h-0 overflow-hidden relative">
         
         {/* Collapsible Inventory Sidebar (Catalog) - Desktop Left Sidebar (md and up) */}
         {isSidebarOpen && (
@@ -122,12 +127,13 @@ function AppContent() {
         )}
 
         {/* Main Chat Workstation (Right side when Catalog is open) */}
-        <div className="flex-1 flex flex-col min-w-0 h-full bg-slate-50">
+        <div className="flex-1 flex flex-col min-w-0 min-h-0 h-full bg-slate-50 overflow-hidden">
           <ChatContainer 
             onOpenEditModal={(item) => setEditingItem(item)}
             onOpenBillingModal={handleOpenBillingModal}
             onOpenPartiesModal={() => setPartiesModalOpen(true)}
             onOpenReportsModal={() => setReportsModalOpen(true)}
+            onOpenGstReportModal={() => setGstReportModalOpen(true)}
           />
           <CommandBar />
         </div>
@@ -175,6 +181,7 @@ function AppContent() {
         onOpenBillingModal={handleOpenBillingModal}
         onOpenPartiesModal={() => setPartiesModalOpen(true)}
         onOpenReportsModal={() => setReportsModalOpen(true)}
+        onOpenGstReportModal={() => setGstReportModalOpen(true)}
         totalItems={totalItems}
       />
 
@@ -204,6 +211,13 @@ function AppContent() {
       <ReportsModal
         isOpen={reportsModalOpen}
         onClose={() => setReportsModalOpen(false)}
+        onOpenGstReportModal={() => setGstReportModalOpen(true)}
+      />
+
+      {/* GST Compliance Report Modal ("ab last me gst report ka option bhi dedo") */}
+      <GstReportModal
+        isOpen={gstReportModalOpen}
+        onClose={() => setGstReportModalOpen(false)}
       />
 
       {/* Full Page Print-Ready GST Tax Invoice Preview View */}
